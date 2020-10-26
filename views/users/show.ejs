@@ -1,0 +1,25 @@
+<h1><%= user.name %>'s Detail Page</h1>
+<h4>Create a New Tweet</h4>
+<form action="/users/<%= user.id %>/tweets" method="POST">
+  <div class="form-group">
+    <label for="tweetText">Tweet Text</label>
+    <input type="text" class="form-control" id="tweetText" name="tweetText" />
+  </div>
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+<h1>Tweets</h1>
+<ul>
+  <% user.tweets.forEach(tweet => { %>
+  <li>
+    <a href="/users/<%= user.id %>/tweets/<%= tweet.id %>/edit"
+      ><%= tweet.tweetText %></a
+    >
+    <form
+      action="/users/<%= user.id %>/tweets/<%= tweet.id %>?_method=DELETE"
+      method="POST"
+    >
+      <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+    </form>
+  </li>
+  <% }) %>
+</ul>

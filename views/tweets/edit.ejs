@@ -1,0 +1,18 @@
+<h1>Edit <%= foundUser.name %>'s Tweet</h1>
+<h4>Edit Tweet</h4>
+<form
+  action="/users/<%= foundUser.id %>/tweets/<%= foundTweet.id %>?_method=PUT"
+  method="POST"
+>
+  <div class="form-group">
+    <label for="tweetText">Tweet Text</label>
+    <input
+      type="text"
+      class="form-control"
+      id="tweetText"
+      name="tweetText"
+      value="<%= foundTweet.tweetText %>"
+    />
+  </div>
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
