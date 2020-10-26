@@ -1,6 +1,15 @@
 const router = require('express').Router();
 const User = require('../models/user').User;
 const Tweet = require('../models/user').Tweet;
+
+//INDEX
+// ALL USERS INDEX
+router.get('/', (req, res) => {
+  User.find({}, (error, users) => {
+    res.render('users/index.ejs', { users });
+  });
+});
+
 // NEW USER FORM
 router.get('/new', (req, res) => {
   res.render('users/new.ejs');
@@ -37,6 +46,12 @@ router.post('/:userId/tweets', (req, res) => {
   });
 });
 
+router.delete("/:id", (req, res)=>{
+  User.findByIdAndRemove(req.params.id, (error) =>{
+    res.redirect("/users");
+  });
+
+})
 
 
 router.get('/:userId/tweets/:tweetId/edit', (req, res) => {
