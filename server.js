@@ -22,6 +22,7 @@ app.use(express.static('public'));
 app.use(methodOverride('_method'));
 // ABOVE our app.get()
 app.use('/users', require('./controllers/usersController'));
+app.use('/albums', require('./controllers/albumsController'));
 
 app.get('/', (req, res) => {
   res.render('home.ejs');

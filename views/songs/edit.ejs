@@ -1,0 +1,17 @@
+<h1>Edit <%= foundAlbum.name %>'s Tweet</h1>
+<h4>Edit Song</h4>
+<form
+  action="/albums/<%= foundAlbum.id %>/songs/<%= foundSong.id %>?_method=PUT"
+  method="POST"
+>
+  <div class="form-group">
+    <label for="songName">Song List</label>
+    <input
+      type="text"
+      class="form-control"
+      id="songName"
+      name="songName" value="<%= foundSong.songName %>"
+    />
+  </div>
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>

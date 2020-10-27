@@ -2,6 +2,7 @@ const router = require('express').Router();
 const User = require('../models/user').User;
 const Tweet = require('../models/user').Tweet;
 
+const dayjs = require('dayjs');
 //INDEX
 // ALL USERS INDEX
 router.get('/', (req, res) => {
@@ -19,9 +20,28 @@ router.get('/new', (req, res) => {
 router.get('/:userId', (req, res) => {
     // find user in db by id and add new tweet
     User.findById(req.params.userId, (error, user) => {
-      res.render('users/show.ejs', { user });
+      res.render('users/show.ejs', { user , dayjs});
     });
   });
+
+//Following two method is working to update user, but only first name of the user 
+// is pulling from the database
+  // EDIT
+  router.get("/:id/edit", (req, res)=>{
+    User.findById(req.params.id, (error, userFromDb) =>{
+      res.render("./users/edit.ejs", {
+        user: userFromDb
+      })
+    })
+    
+  })
+
+  //UPDATE USER
+  // router.put("/:id", (req, res) => {
+  //   User.findByIdAndUpdate(req.params.id, req.body, (error, updatedUser) =>{
+  //     res.redirect("/users");
+  //   })
+  // })
 
 
 // CREATE A NEW USER
@@ -98,10 +118,6 @@ router.delete('/:userId/tweets/:tweetId', (req, res) => {
     });
   });
 });
-
-
-
-
 
 
 module.exports = router;
